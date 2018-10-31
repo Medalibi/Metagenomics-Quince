@@ -46,7 +46,7 @@ RUN apt-get update; apt-get install -y build-essential ca-certificates libbz2-de
     libxcomposite1 libtiff5 libssl-dev python3 python3-dev mesa-common-dev tar python-dev sudo mercurial \
     libcurses-ocaml-dev libgl1-mesa-dri libgl1-mesa-glx mesa-utils fcitx-frontend-qt5 libqt5gui5 openjfx \
     fcitx-modules fcitx-module-dbus libedit2 libxml2-dev default-jre default-jre-headless python sqlite3 \
-    python3-pip python-pip libgsl-dev \
+    python3-pip python-pip libgsl-dev liblapack-dev liblapacke-dev r-base \
     && update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java \
     && echo "en_GB.UTF-8 UTF-8" >> /etc/locale.gen \
     && locale-gen en_GB.utf8 \
@@ -56,7 +56,7 @@ RUN apt-get update; apt-get install -y build-essential ca-certificates libbz2-de
 ########
 RUN apt update && apt install -y bwa prodigal \
     && pip install -U numpy bcbio-gff cython scipy biopython pandas scikit-learn checkm-genome \
-    && pip3 install -U cython \
+    && pip3 install -U cython numpy biopython \
     && rm -rf /var/lib/apt/lists/* \
     && apt -y autoremove && apt autoclean && rm -rf /var/lib/apt/lists/*
 
@@ -160,7 +160,9 @@ RUN tar xvf /usr/local/0.4.0.tar.gz -C /usr/local/ \
 RUN git clone https://github.com/chrisquince/DESMAN.git /usr/local/DESMAN \
     && cd /usr/local/DESMAN \
     && chmod 777 -R /usr/local/DESMAN \
-    && python3 ./setup.py install
+    && python3 ./setup.py install \
+    && export DESMANHOME="/usr/local/DESMAN" \
+    && echo 'export DESMANHOME="/usr/local/DESMAN"' >> /etc/bash.bashrc
 
 ## Install Bam_readcount
 ########
@@ -178,7 +180,7 @@ RUN git clone https://github.com/bbuchfink/diamond.git /usr/local/diamond \
     && mkdir /usr/local/diamond/bin \
     && cd /usr/local/diamond/bin \
     && cmake .. \
-    && make install 
+    && make install
 
 ## Create user training
 ########

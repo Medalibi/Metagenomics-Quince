@@ -46,7 +46,7 @@ RUN apt-get update; apt-get install -y build-essential ca-certificates libbz2-de
     libxcomposite1 libtiff5 libssl-dev python3 python3-dev mesa-common-dev tar python-dev sudo mercurial \
     libcurses-ocaml-dev libgl1-mesa-dri libgl1-mesa-glx mesa-utils fcitx-frontend-qt5 libqt5gui5 openjfx \
     fcitx-modules fcitx-module-dbus libedit2 libxml2-dev default-jre default-jre-headless python sqlite3 \
-    python3-pip python-pip libgsl-dev liblapack-dev liblapacke-dev r-base cmake \
+    python3-pip python-pip libgsl-dev liblapack-dev liblapacke-dev r-base cmake libcurl4 libcurl4-openssl-dev \
     && update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java \
     && echo "en_GB.UTF-8 UTF-8" >> /etc/locale.gen \
     && locale-gen en_GB.utf8 \

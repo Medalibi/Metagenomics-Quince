@@ -56,6 +56,7 @@ RUN apt-get update; apt-get install -y build-essential ca-certificates libbz2-de
 ########
 RUN apt update && apt install -y bwa prodigal \
     && pip install -U numpy bcbio-gff cython scipy biopython pandas scikit-learn checkm-genome \
+    && pip3 install -U cython \
     && rm -rf /var/lib/apt/lists/* \
     && apt -y autoremove && apt autoclean && rm -rf /var/lib/apt/lists/*
 
